@@ -1,6 +1,9 @@
 # audio2stl
 Converts an audio file to a 3D spectrogram and (optionally) saves as a stereolithography (STL) file for 3D printing
 
+![example](https://github.com/ChristopherCarignan/audio2stl/blob/master/spec3d.png)
+
+
 Date: 2019-06-13
 
 Author: Christopher Carignan
