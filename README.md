@@ -20,10 +20,10 @@ Arguments:
 
   inputfile (required): filepath string associated with WAV audio file
 
-  outputfile (optional): filepath sring associated with STL file to save
+  outputfile (optional): filepath string associated with STL file to save
 
   sampfreq: re-sampling frequency
 
-  axisnorm: keep the x- and y-axes scaling (FALSE) or normalize so that they have the same dimensions (TRUE)
+  axisnorm: keep the x- and y-axis scaling (FALSE) or normalize so that they have the same dimensions (TRUE)
 
   preemph: value for pre-emphasis of audio
