@@ -24,8 +24,8 @@ audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALS
     if ((!is.numeric(samp.rate)) || (samp.rate < 2000) || (samp.rate > 192000)) 
       stop("samp.rate must be an integer in [2000, 192000].")
     if (object@samp.rate > samp.rate) {
-      ll <- length(object@left)
-      object <- object[round(seq(1, ll, length = samp.rate * ll/object@samp.rate))]
+      ll      <- max(dim(object@.Data))
+      object  <- object[round(seq(1, ll, length = samp.rate * ll/object@samp.rate))]
       object@samp.rate <- samp.rate
     }
     else warning("samp.rate > object's original sampling rate, hence object is returned unchanged.")
