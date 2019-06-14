@@ -75,9 +75,9 @@ audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALS
     spec <- as.matrix(s) # convert rasterized spectrogram back to matrix object
   }
   
-  # Create color map to overlay on 3D spectrogram
+  # Create grayscale map to overlay on 3D spectrogram
   tempfilename <- tempfile()
-  png(tempfilename, width=ncol(spec), height=nrow(spec))
+  png(tempfilename, width=nrow(spec), height=ncol(spec))
   par(mar=c(0,0,0,0))
   raster::image(matlab::fliplr(spec), axes=FALSE, col=rev(gray.colors(50, start=0, end=1)))
   dev.off()
@@ -85,12 +85,12 @@ audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALS
   
   # Create and plot the 3D spectrogram
   spec %>%
-    sphere_shade(texture='bw') %>%
-    add_overlay(tempmap, alphalayer = 0.7) %>%
+    sphere_shade(texture="bw") %>%
+    add_overlay(tempmap, alphalayer=0.8) %>%
     plot_3d(spec, zscale=1, theta=225)
   
   # If an output file is provided, save the 3D spectrogram as an STL file
   if (!is.null(outputfile)) { 
-    save_3dprint(outputfile, maxwidth = 50, unit="mm")
+    save_3dprint(outputfile, maxwidth=50, unit="mm")
   }
 }
