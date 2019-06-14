@@ -15,15 +15,13 @@
 #     ex: 'bartlett', 'blackman', 'hamming', 'hanning', 'triang'
 
 
+# Load required libraries
+libraries <- c("rayshader","dplyr","tuneR","matlab","signal","raster","png")
+lapply(libraries, require, character.only = TRUE)
+
+
+# Main function
 audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALSE, preemph=0.97, window=NULL) {
-  # Load libraries
-  library(rayshader)
-  library(dplyr)
-  library(tuneR)
-  library(matlab)
-  library(png)
-  library(signal)
-  
   # Function for resampling audio
   resampleWave <- function (object, samp.rate) {
     if ((!is.numeric(samp.rate)) || (samp.rate < 2000) || (samp.rate > 192000)) 
@@ -66,8 +64,6 @@ audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALS
   
   # Optional normalization of dimensions of x- and y-axes
   if (axisnorm) {
-    library(raster)
-    
     height  <- nrow(spec)
     width   <- ncol(spec)
     
