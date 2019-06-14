@@ -16,7 +16,7 @@
 
 
 # Load required libraries
-libraries <- c("rayshader","dplyr","tuneR","matlab","signal","raster","png")
+libraries <- c("rayshader","dplyr","tuneR","matlab","raster","png","signal")
 lapply(libraries, require, character.only = TRUE)
 
 
