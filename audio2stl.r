@@ -11,15 +11,18 @@
 #   sampfreq: re-sampling frequency
 #   axisnorm: keep the x- and y-axes scaling (FALSE) or normalize so that they have the same dimensions (TRUE)
 #   preemph: value for pre-emphasis of audio
+#   window: option for windowing audio using a variety of Matlab/Octave compatible filters found in the "singal" package
+#     ex: 'bartlett', 'blackman', 'hamming', 'hanning', 'triang'
 
 
-audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALSE, preemph=0.97) {
+audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALSE, preemph=0.97, window=NULL) {
   # Load libraries
   library(rayshader)
   library(dplyr)
   library(tuneR)
   library(matlab)
   library(png)
+  library(signal)
   
   # Function for resampling audio
   resampleWave <- function (object, samp.rate) {
@@ -44,14 +47,20 @@ audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALS
     snd <- snd[,1]
   }
   
-  # Implement preemphasis of audio, according to the function:
+  # Implement pre-emphasis of audio, according to the function:
   # ŝ(x) = s(x)-k*s(x-1)
   snd_preemph <- rep(0, length(snd))
   for(i in 2:length(snd)){
     snd_preemph[i] <- snd[i] - preemph * snd[i - 1]
   }
   
-  # Create spectrogram
+  # Implement windowing of audio, if a window is provided
+  if (!is.null(window)) { 
+    eval(parse(text=paste("wind <- signal::",window,"(length(snd_preemph))")))
+    snd_preemph <- snd_preemph*wind
+  }
+  
+  # Create standard (i.e., 2.5D) spectrogram
   spec  <- powspec(snd_preemph, sr=fs, wintime=0.025, steptime=0.01, dither=FALSE) # power spectrum
   spec  <- 10*log10(abs(spec)) # convert to absolute spectrum
   
