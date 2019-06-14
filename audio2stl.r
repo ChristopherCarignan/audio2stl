@@ -11,7 +11,7 @@
 #   sampfreq: re-sampling frequency
 #   axisnorm: keep the x- and y-axes scaling (FALSE) or normalize so that they have the same dimensions (TRUE)
 #   preemph: value for pre-emphasis of audio
-#   window: option for windowing audio using a variety of Matlab/Octave compatible filters found in the "singal" package
+#   window: option for windowing audio using a variety of Matlab/Octave compatible filters found in the "signal" package
 #     ex: 'bartlett', 'blackman', 'hamming', 'hanning', 'triang'
 
 
