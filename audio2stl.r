@@ -94,8 +94,8 @@ audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALS
   
   # Create and plot the 3D spectrogram
   spec %>%
-    sphere_shade(texture="bw") %>%
-    add_overlay(tempmap, alphalayer=0.8) %>%
+    sphere_shade(texture="bw", sunangle=45) %>%
+    add_overlay(tempmap, alphalayer=0.75) %>%
     plot_3d(spec, zscale=1, theta=225)
   
   # If an output file is provided, save the 3D spectrogram as an STL file
