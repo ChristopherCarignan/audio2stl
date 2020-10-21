@@ -86,12 +86,13 @@ audio2stl <- function (inputfile, outputfile=NULL, sampfreq=16000, axisnorm=FALS
   par(mar=c(0,0,0,0))
   raster::image(matlab::fliplr(spec), axes=FALSE, col=rev(gray.colors(50, start=0, end=1)))
   dev.off()
-  tempmap <- png::readPNG(tempfilename)
+  #tempmap <- png::readPNG(tempfilename)
   
   # Create and plot the 3D spectrogram
   spec %>%
     rayshader::sphere_shade(texture="bw", sunangle=45) %>%
-    rayshader::add_overlay(tempmap, alphalayer=0.75) %>%
+    #rayshader::add_overlay(tempmap, alphalayer=0.75) %>%
+    rayshader::add_overlay(tempfilename, alphalayer=0.75) %>%
     rayshader::plot_3d(spec, zscale=1, theta=225)
   
   # If an output file is provided, save the 3D spectrogram as an STL file
