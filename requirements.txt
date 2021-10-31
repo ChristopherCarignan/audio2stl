@@ -1,0 +1,8 @@
+rayshader
+dplyr
+tuneR
+matlab
+raster
+png
+signal
+magick
